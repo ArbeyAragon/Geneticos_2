@@ -10,20 +10,41 @@
 #include <algorithm>
 
 #include "Indiv.h"
+#include "../VectorExtras/VectorExtras.h"
 
 
 using namespace std;
 
 
-Indiv::Indiv(vector<double> binario){};
-Indiv::Indiv(){};
+Indiv::Indiv(vector<double> vec){
+    VecW=vec;
+    fitness=fitnessCalc();
+};
+Indiv::Indiv(){
+    VecW=VectorExtras::vectorDoubleRand(len ,0, 1);
+    fitness=fitnessCalc();
+};
 
 
-double Indiv::getFitness(){};
+double Indiv::getFitness(){
+    return fitness;
+};
 
 void Indiv::setVec(vector<double> binario){};
-vector<double> Indiv::getVect(){};
+vector<double> Indiv::getVect(){return VecW;};
 
+
+double Indiv::fitnessCalc(){
+    double sum=0;
+    for(int i=0; i < VecW.size(); i++){
+        sum=sum+VecW[i];
+    }
+    return sum;
+};
 
 void Indiv::guarda(){};
-Indiv::~Indiv(){};
+
+Indiv::~Indiv(){
+    VecW.clear();
+    //ecW.~vector<double>();
+};

@@ -8,11 +8,11 @@ using namespace std;
 class Indiv
 {
     private:
-        vector<double> VecOrdenes;
+        vector<double> VecW;
         double fitness;
 		double fitnessCalc();
-		
     public:
+        static const int len=10; 
 		Indiv(vector<double> binario);
 		Indiv();
         
@@ -21,7 +21,7 @@ class Indiv
 		vector<double> getVect();
 
    		void guarda();
-		~Indiv();/**/
+		~Indiv();
 
 };
 
