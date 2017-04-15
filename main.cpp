@@ -19,69 +19,44 @@
 #include "HC/hc.h"
 
 using namespace std;
-#define NUM_THREADS     10
+#define NUM_THREADS     30
 
-/*
-void *sim(void *){
-    HC* asc = new HC(100);
-    asc->run();
-    delete asc;
+pthread_t threads[NUM_THREADS];
 
-    return NULL
-}/**/
+int contTerminate = 0;
+void detenida(long id){
+    contTerminate++;
+    cout<<"terminado  "<<id<<" "<<contTerminate<<endl;
+}
 
-void *PrintHello(void *threadid) {
+void *EjecutaHilos(void *threadid) {
    long tid;
    tid = (long)threadid;
-   cout<< endl << "Hello World! Thread ID, " << tid << endl;
+   cout<< endl << "Hilos iniciado, " << tid << endl;
 
-    HC* asc = new HC(100,tid);
+    HC* asc = new HC(10000,tid);
     asc->run();
     delete asc;
+    detenida(tid);
    pthread_exit(NULL);
-}/**/
+}
 
 int main()
 {	
     VectorExtras::initRandom();
-
-    //pthread_t threads[NUM_THREADS];
-    HC* asc ;
-    //for(long i = 0; i<NUM_THREADS; i++){
-        asc = new HC(100,5);
-        asc->run();
-        //asc.~HC();/**/
-        delete asc;
+    int rc;
+    
+    //HC* asc ;
+    for(long i = 0; i<NUM_THREADS; i++){
+        cout<<i<<endl;
+        //asc = new HC(1000,5);
+        //asc->run();
+        //delete asc;
         //pthread_t thread;
-        //pthread_create(&threads[i], NULL, PrintHello, (void*)i);
-    //}
-
-
-    //char result[100];   // array to hold the result.
-    string one = "Hello ";
-    string two = "World";
-    long number = 123;
-    //sprintf(one, "hola %d .txt",f4);
+        pthread_create(&threads[i], NULL, EjecutaHilos, (void*)i);
+    }
+    for(long i = 0; i<NUM_THREADS; i++){ pthread_join(threads[i], NULL);  }
     
-
-    ostringstream str1;
- 
-    // Sending a number as a stream into output
-    // string
-    str1 << number;
- 
-    // the str() coverts number into string
-    string geek = str1.str();
-
-    cout <<endl<< one+two+geek<<endl;
-    //long f4 = 123;
-    //string f_str4 = to_string(f4);
-    
-    //cout << f_str4;
-
-    //string::strcat(one,two); // copy string one into the result.
-    //cout<<one;
-
     return 0;
 }
 

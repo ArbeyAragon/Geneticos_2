@@ -24,17 +24,24 @@ public:
     MyFILE(string title, long id){
         ostringstream str1;
         str1 << id;
+        string res = "Resultados/";
         string txt = ".txt";
-        string fileT = title+str1.str()+txt;
+        string fileT = res+title+str1.str()+txt;
         doc = fopen(fileT.c_str(),"w");
     };
 
     void addLine(vector<double> w,double fitness){
+        fprintf(doc,"%5.5f,",fitness);
         for(int i = 0; i< w.size();i++){
             //cout<<w[i]<<endl;
-            fprintf(doc,"%5.5f,",w[i]);
+            fprintf(doc,"%5.5f",w[i]);
+            if(i==(w.size()-1)){
+                fprintf(doc,"\n");
+            }else{
+                fprintf(doc,",");
+            }
         }
-        fprintf(doc,"%5.5f\n",fitness);
+        
     
     };
 
@@ -60,7 +67,7 @@ void HC::run(){
 
     Indiv* SujMejor2;
     for(int i=0 ; i<iteraciones ; i++){
-        cout<<i<<"*****"<<id<<"*****";
+        //cout<<i<<"*****"<<id<<"*****";
         SujMejor2 = new Indiv();
         if(SujMejor2->getFitness()>SujMejor->getFitness()){
             delete SujMejor;
@@ -68,7 +75,7 @@ void HC::run(){
             
         }
         
-        cout<<SujMejor->getFitness()<<endl;
+        //cout<<SujMejor->getFitness()<<endl;
         archivo->addLine(SujMejor->getVect(),SujMejor->getFitness());
     }
     delete archivo;

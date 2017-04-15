@@ -12,7 +12,7 @@ class Indiv
         double fitness;
 		double fitnessCalc();
     public:
-        static const int len=10; 
+        static const int len=100; 
 		Indiv(vector<double> binario);
 		Indiv();
         
