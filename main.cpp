@@ -68,14 +68,14 @@ int main()
 {	
     VectorExtras::initRandom();
     
-    HCExect();
+    //HCExect();
     /*
     HC* asc ;
     asc = new HC(1000,5);
     asc->run();
     delete asc;/**/
 
-    /*
+    
     EE* asc ;
     asc = new EE(1000,10,5);
     asc->run();

@@ -77,7 +77,75 @@ void EE::run(){
         poblacion.push_back(Indiv());
     }
 
+
     sort(poblacion.begin(),poblacion.end(), less_than_key());
+
+    for(int j = 0 ; j < iteraciones ; j++){
+        vector<Indiv> poblacionNew;
+        ///////////////////Cruce1
+        for(int i = 1 ; i < Pobl ; i++){
+            
+            vector<double> VecW_H1;
+            vector<double> VecW_H2;
+
+            vector<double> VecSigma_H1;
+            vector<double> VecSigma_H2;
+
+
+            VectorExtras::CRUCENormal(poblacion[i].getVect(),poblacion[i-1].getVect(),VecW_H1,VecW_H2);
+            VectorExtras::CRUCENormal(poblacion[i].getVectSigma(),poblacion[i-1].getVectSigma(),VecSigma_H1,VecSigma_H2);
+
+            Indiv H1 = Indiv(VecW_H1,VecSigma_H1);
+            Indiv H2 = Indiv(VecW_H1,VecSigma_H1);
+            
+            poblacionNew.push_back(H1);
+            poblacionNew.push_back(H2);
+        }
+        ///////////////////Cruce2
+        for(int i = 1 ; i < Pobl ; i++){
+            vector<double> VecW_H1;
+            vector<double> VecSigma_H1;
+
+            VectorExtras::CRUCEMath(poblacion[i].getVect(),poblacion[i-1].getVect(),VecW_H1);
+            VectorExtras::CRUCEMath(poblacion[i].getVectSigma(),poblacion[i-1].getVectSigma(),VecSigma_H1);
+
+            Indiv H1 = Indiv(VecW_H1,VecSigma_H1);
+            poblacionNew.push_back(H1);
+        }
+
+            ///////////////////Mutacion
+        for(int i = 0 ; i < Pobl ; i++){
+            vector<double> VecW_H1;
+            VectorExtras::MUTACION(poblacion[i].getVect() , poblacion[i].getVectSigma(), VecW_H1);
+            Indiv H1 = Indiv(VecW_H1,poblacion[i].getVectSigma());
+            poblacionNew.push_back(H1);
+        }
+        
+        poblacionNew.swap(poblacion);
+        poblacion.clear();
+
+        sort(poblacionNew.begin(),poblacionNew.end(), less_than_key());
+
+        for(int i = 0 ; i < Pobl ; i++){
+            poblacion.push_back(poblacionNew[i]);
+            //cout<<poblacionNew[i].getFitness()<<endl;
+        }
+        cout<<poblacion[0].getFitness()<<endl;
+        poblacionNew.clear();
+    }
+    cout<<"*******************"<<endl;
+    for(int i = 0 ; i < Pobl ; i++){
+        cout<<poblacion[i].getFitness()<<endl;
+    }
+
+/*
+
+    ///////////////////Mutacion
+    for(int i = 0 ; i < Pobl ; i++){
+        poblacionNew.push_back(Indiv());
+    }
+
+/**/
 /*
     for(int i = 0 ; i < Pobl ; i++){
         cout<<poblacion[i].getFitness()<<endl;

@@ -24,6 +24,13 @@ double VectorExtras::randDouble(double min, double max){
    return r;
 };
 
+int VectorExtras::randInt(int min, int max)
+{
+   int r;
+   r = (rand()%max)+min;
+   return r;
+}
+
 
 
 double VectorExtras::Sigmoid(double x){
@@ -76,11 +83,36 @@ vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
     return salida; 
 };
 
+
+
 ///////////////////////////////Geneticos EE
-/*vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
-    vector<double> salida ;
-    for(int i = 0 ; i < len ; i++ ){
-        salida.push_back(randDouble(min, max));
+void VectorExtras::MUTACION(vector<double> P1,vector<double> Ps1, vector<double> &H1){
+    //vector<double> H1;
+    for(int i = 0 ; i < P1.size() ; i++ ){
+        H1.push_back(rand_normal(P1[i], Ps1[i], 0.0, 1.0 ));
     }
-    return salida; 
+    //return H1; 
+};
+
+void VectorExtras::CRUCENormal(vector<double> P1,vector<double> P2,vector<double> &H1,vector<double> &H2){
+    for(int i = 0 ; i < P1.size() ; i++ ){
+        if(randDouble(0, 0.5)<0.5){
+            H2.push_back(P2[i]);
+            H1.push_back(P1[i]);
+        }else{
+            H2.push_back(P1[i]);
+            H1.push_back(P2[i]);  
+        }
+    }
+    //return hijos; 
 };/**/
+
+
+void VectorExtras::CRUCEMath(vector<double> P1,vector<double> P2, vector<double> &H1){
+    //vector<double> H1;
+    for(int i = 0 ; i < P1.size() ; i++ ){
+        H1.push_back((P1[i]+P2[i])*0.5);
+    }
+    //return H1; 
+};
+
