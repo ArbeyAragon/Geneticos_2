@@ -11,12 +11,12 @@
 #include <sstream>
 #include <string>
 #include <pthread.h>
-//#include <sstream>
 
 #include "Individuo/Indiv.h"
 #include "VectorExtras/VectorExtras.h"
 
 #include "HC/hc.h"
+#include "EE/ee.h"
 
 using namespace std;
 #define NUM_THREADS     30
@@ -29,7 +29,7 @@ void detenida(long id){
     cout<<"terminado  id:"<<id<<" contador:"<<contTerminate<<endl;
 }
 
-void *EjecutaHilos(void *threadid) {
+void *EjecutaHilosHC(void *threadid) {
    long tid;
    tid = (long)threadid;
    cout<< endl << "Hilos iniciado, " << tid << endl;
@@ -42,15 +42,8 @@ void *EjecutaHilos(void *threadid) {
 }
 
 
-int main()
-{	
-    VectorExtras::initRandom();
-    int rc;
-    /*
-    HC* asc ;
-    asc = new HC(1000,5);
-    asc->run();
-    delete asc;/**/
+
+void HCExect(){
     pthread_t threads[NUM_THREADS];
     long tem=0;
     long tem1=0;
@@ -58,7 +51,7 @@ int main()
         for(int i = 0; i<10; i++){
             cout<<tem<<endl;
             
-            pthread_create(&threads[tem], NULL, EjecutaHilos, (void*)tem);
+            pthread_create(&threads[tem], NULL, EjecutaHilosHC, (void*)tem);
             tem++;
         }
         for(long i = 0; i<10; i++){ 
@@ -66,8 +59,27 @@ int main()
             pthread_join(threads[tem1], NULL); 
             tem1++; 
         }
-        //sleep(50);
     }
+}
+
+
+
+int main()
+{	
+    VectorExtras::initRandom();
+    
+    HCExect();
+    /*
+    HC* asc ;
+    asc = new HC(1000,5);
+    asc->run();
+    delete asc;/**/
+
+    /*
+    EE* asc ;
+    asc = new EE(1000,10,5);
+    asc->run();
+    delete asc;
     /**/
 
 

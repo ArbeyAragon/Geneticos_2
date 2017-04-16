@@ -20,7 +20,6 @@ class HC
         HC(int iter, long tid);
         void run();
 
-   		void save(string id);
 		~HC();
 
 };

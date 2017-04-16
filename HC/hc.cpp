@@ -77,6 +77,6 @@ void HC::run(){
     delete archivo;
 };
 
-void HC::save(string id){};
+
 
 HC::~HC(){  SujMejor.~Indiv();/**/ }; 

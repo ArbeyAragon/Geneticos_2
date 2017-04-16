@@ -75,3 +75,12 @@ vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
     }
     return salida; 
 };
+
+///////////////////////////////Geneticos EE
+/*vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
+    vector<double> salida ;
+    for(int i = 0 ; i < len ; i++ ){
+        salida.push_back(randDouble(min, max));
+    }
+    return salida; 
+};/**/

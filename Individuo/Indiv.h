@@ -9,16 +9,25 @@ class Indiv
 {
     private:
         vector<double> VecW;
+		vector<double> VecSigma;
+
         double fitness;
 		double fitnessCalc();
     public:
         static const int len=100; 
+		Indiv(vector<double> vec, vector<double> sigma);
 		Indiv(vector<double> vec);
 		Indiv();
         
         double getFitness();
-		void setVec(vector<double> vec);
+
+		void setVect(vector<double> vec);
+		void setVectSigma(vector<double> sigma);
+		void setVectSigmaEE(vector<double> vec, vector<double> sigma);
+
 		vector<double> getVect();
+		vector<double> getVectSigma();
+
 
    		void guarda();
 		~Indiv();
