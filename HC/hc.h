@@ -13,7 +13,7 @@ class HC
     private:
         int iteraciones;
         long id;
-        Indiv* SujMejor;
+        Indiv SujMejor;
 
     public:
         

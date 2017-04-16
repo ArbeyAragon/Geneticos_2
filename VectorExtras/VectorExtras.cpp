@@ -68,11 +68,10 @@ double VectorExtras::rand_normal(double mean, double stddev, double min, double 
     }
 }
 
-
 vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
-    vector<double> salida;
+    vector<double> salida ;
     for(int i = 0 ; i < len ; i++ ){
         salida.push_back(randDouble(min, max));
     }
-    return salida;
+    return salida; 
 };

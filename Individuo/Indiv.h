@@ -13,11 +13,11 @@ class Indiv
 		double fitnessCalc();
     public:
         static const int len=100; 
-		Indiv(vector<double> binario);
+		Indiv(vector<double> vec);
 		Indiv();
         
         double getFitness();
-		void setVec(vector<double> binario);
+		void setVec(vector<double> vec);
 		vector<double> getVect();
 
    		void guarda();

@@ -56,32 +56,27 @@ private:
 HC::HC(int iter,long tid){
     iteraciones=iter;
     id=tid;
-    SujMejor = new Indiv();
-    //Indiv SujMejor2 = Indiv();;
-    //SujMejor=&SujMejor2;
+    SujMejor = Indiv();
 };
 
 void HC::run(){
     string title = "HC_";
     MyFILE* archivo = new MyFILE(title, id);
-
-    Indiv* SujMejor2;
+    
+    Indiv SujMejor2;
     for(int i=0 ; i<iteraciones ; i++){
-        //cout<<i<<"*****"<<id<<"*****";
-        SujMejor2 = new Indiv();
-        if(SujMejor2->getFitness()>SujMejor->getFitness()){
-            delete SujMejor;
-            SujMejor=SujMejor2;
-            
-        }
         
-        //cout<<SujMejor->getFitness()<<endl;
-        archivo->addLine(SujMejor->getVect(),SujMejor->getFitness());
+        SujMejor2 = Indiv();
+        
+        if((SujMejor2).getFitness()>(SujMejor).getFitness()){
+            SujMejor.~Indiv();
+            SujMejor=SujMejor2;
+        }/**/
+        archivo->addLine((SujMejor).getVect(),(SujMejor).getFitness());
     }
     delete archivo;
-    //cout<<endl;
 };
 
 void HC::save(string id){};
 
-HC::~HC(){  /*delete SujMejor;*/ };
+HC::~HC(){  SujMejor.~Indiv();/**/ }; 

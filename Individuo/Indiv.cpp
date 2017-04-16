@@ -14,13 +14,31 @@
 
 
 using namespace std;
+/*
+void initRandom(){srand(time(0));};
+
+double randDouble(double min, double max){
+   double r = ((double) rand() / (RAND_MAX));
+   r = r * (max-min)+min;
+   return r;
+};
+
+vector<double> vectorDoubleRand(int len ,double min, double max){
+    vector<double> salida ;
+    for(int i = 0 ; i < len ; i++ ){
+        salida.push_back(randDouble(min, max));
+    }
+    return salida; 
+};/**/
 
 
 Indiv::Indiv(vector<double> vec){
+    //initRandom();
     VecW=vec;
     fitness=fitnessCalc();
-};
+};/**/
 Indiv::Indiv(){
+    //initRandom();
     VecW=VectorExtras::vectorDoubleRand(len ,0, 1);
     fitness=fitnessCalc();
 };
@@ -46,5 +64,6 @@ void Indiv::guarda(){};
 
 Indiv::~Indiv(){
     VecW.clear();
+    vector<double>().swap(VecW);
     //ecW.~vector<double>();
 };
