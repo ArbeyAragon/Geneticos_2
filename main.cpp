@@ -17,6 +17,7 @@
 
 #include "HC/hc.h"
 #include "EE/ee.h"
+#include "DE/de.h"
 
 using namespace std;
 #define NUM_THREADS     30
@@ -29,12 +30,13 @@ void detenida(long id){
     cout<<"terminado  id:"<<id<<" contador:"<<contTerminate<<endl;
 }
 
-void *EjecutaHilosHC(void *threadid) {
+void *EjecutaHilos(void *threadid) {
    long tid;
    tid = (long)threadid;
    cout<< endl << "Hilos iniciado, " << tid << endl;
-
-    HC* asc = new HC(100000,tid);
+    //HC* asc = new HC(10000,tid);
+    EE* asc = new EE(1000,60,tid);
+    //DE* asc = new DE(1000,60,tid);
     asc->run();
     delete asc;
     detenida(tid);
@@ -51,7 +53,7 @@ void HCExect(){
         for(int i = 0; i<10; i++){
             cout<<tem<<endl;
             
-            pthread_create(&threads[tem], NULL, EjecutaHilosHC, (void*)tem);
+            pthread_create(&threads[tem], NULL, EjecutaHilos, (void*)tem);
             tem++;
         }
         for(long i = 0; i<10; i++){ 
@@ -68,20 +70,24 @@ int main()
 {	
     VectorExtras::initRandom();
     
-    //HCExect();
+    HCExect();
+
     /*
-    HC* asc ;
-    asc = new HC(1000,5);
+    HC* asc = new HC(1000,5);
     asc->run();
     delete asc;/**/
 
-    
-    EE* asc ;
-    asc = new EE(1000,10,5);
+    /*
+    EE* asc = new EE(1000,60,5);
     asc->run();
     delete asc;
     /**/
 
+/*
+    DE* asc = new DE(1000,60,5);
+    asc->run();
+    delete asc;
+    /**/
 
     return 0;
 }

@@ -88,7 +88,15 @@ vector<double> VectorExtras::vectorDoubleRand(int len ,double min, double max){
 ///////////////////////////////Geneticos EE
 void VectorExtras::MUTACION(vector<double> P1,vector<double> Ps1, vector<double> &H1){
     //vector<double> H1;
+    double tem;
     for(int i = 0 ; i < P1.size() ; i++ ){
+        tem=P1[i]+rand_normal(0, Ps1[i], -1.0, 1.0 );
+        if(tem>1){
+            tem=1;
+        }else if(tem<0){
+            tem=0;
+        }
+
         H1.push_back(rand_normal(P1[i], Ps1[i], 0.0, 1.0 ));
     }
     //return H1; 
@@ -116,3 +124,24 @@ void VectorExtras::CRUCEMath(vector<double> P1,vector<double> P2, vector<double>
     //return H1; 
 };
 
+///////////////////////////////Geneticos DE
+
+bool VectorExtras::MutacionDE(double Cr, double F, vector<double> Pi, vector<double> P0, vector<double> P1, vector<double> P2, vector<double> &H1){
+    int jrand = randInt(0, P1.size());
+    double tem;
+    bool valido=true;
+    for(int i = 0 ; i < Pi.size() ; i++ ){
+        if((randDouble(0.0, 1.0)<= Cr)||(i==jrand)){
+            tem=P0[i]+F*(P1[i]-P2[i]);
+            if(tem>1){
+                valido=false;
+            }else if(tem<0){
+                valido=false;
+            }
+            H1.push_back(tem);
+        }else{
+            H1.push_back(Pi[i]);
+        }
+    }/**/
+    return valido;
+};

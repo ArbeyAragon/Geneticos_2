@@ -21,5 +21,7 @@ class VectorExtras
         static void CRUCENormal(vector<double> P1,vector<double> P2,vector<double> &H1,vector<double> &H2);
         static void CRUCEMath(vector<double> P1,vector<double> P2,vector<double> &H1);
 
+        ///////Geneticos DE
+        static bool MutacionDE(double Cr, double F, vector<double> Pi, vector<double> P0, vector<double> P1, vector<double> P2, vector<double> &H1);
 };
 #endif

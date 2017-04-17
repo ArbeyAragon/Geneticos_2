@@ -69,7 +69,7 @@ struct less_than_key
 
 void EE::run(){
     string title = "EE_";
-    //MyFILE* archivo = new MyFILE(title, id); 
+    MyFILE* archivo = new MyFILE(title, id); 
 
     /* Poblacion Inicial */   
     vector<Indiv> poblacion;
@@ -77,9 +77,13 @@ void EE::run(){
         poblacion.push_back(Indiv());
     }
 
-
     sort(poblacion.begin(),poblacion.end(), less_than_key());
+    
+    for(int i = 0 ; i < Pobl ; i++){
+        cout<<poblacion[i].getFitness()<<endl;
+    }/**/
 
+    cout<<"*******************"<<endl;
     for(int j = 0 ; j < iteraciones ; j++){
         vector<Indiv> poblacionNew;
         ///////////////////Cruce1
@@ -121,7 +125,7 @@ void EE::run(){
             poblacionNew.push_back(H1);
         }
         
-        poblacionNew.swap(poblacion);
+        //poblacionNew.swap(poblacion);
         poblacion.clear();
 
         sort(poblacionNew.begin(),poblacionNew.end(), less_than_key());
@@ -131,40 +135,16 @@ void EE::run(){
             //cout<<poblacionNew[i].getFitness()<<endl;
         }
         cout<<poblacion[0].getFitness()<<endl;
+        archivo->addLine((poblacion[0]).getVect(),(poblacion[0]).getFitness());
         poblacionNew.clear();
     }
     cout<<"*******************"<<endl;
     for(int i = 0 ; i < Pobl ; i++){
         cout<<poblacion[i].getFitness()<<endl;
-    }
-
-/*
-
-    ///////////////////Mutacion
-    for(int i = 0 ; i < Pobl ; i++){
-        poblacionNew.push_back(Indiv());
-    }
-
-/**/
-/*
-    for(int i = 0 ; i < Pobl ; i++){
-        cout<<poblacion[i].getFitness()<<endl;
     }/**/
 
 
-    //Indiv SujMejor2;
-    /*
-    for(int i=0 ; i<iteraciones ; i++){
-        
-        SujMejor2 = Indiv();
-        
-        if((SujMejor2).getFitness()>(SujMejor).getFitness()){
-            SujMejor.~Indiv();
-            SujMejor=SujMejor2;
-        }
-        //archivo->addLine((SujMejor).getVect(),(SujMejor).getFitness());
-    }/**/
-    //delete archivo;
+    delete archivo;
 
 };
 
