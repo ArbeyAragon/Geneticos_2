@@ -53,11 +53,15 @@ double Indiv::getFitness(){
     return fitness;
 };
 
-void Indiv::setVect(vector<double> vec){ VecW=vec; };
+void Indiv::setVect(vector<double> vec){ 
+    VecW=vec;
+    fitness=fitnessCalc(); 
+};
 void Indiv::setVectSigma(vector<double> sigma){ VecSigma=sigma; };
 void Indiv::setVectSigmaEE(vector<double> vec, vector<double> sigma){
     VecW=vec;
     VecSigma=sigma;
+    fitness=fitnessCalc();
 };
 
 vector<double> Indiv::getVect(){ return VecW; };

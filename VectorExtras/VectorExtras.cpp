@@ -14,6 +14,17 @@
 
 using namespace std;
 
+
+
+double saturacion(double val,double min, double max){
+    if(val>max){
+        return max;
+    }else if(val<min){
+        return min;
+    }
+    return val;
+};
+
 void VectorExtras::initRandom(){srand(time(0));};
 
 void VectorExtras::printVec(vector<double> bin){};
@@ -144,4 +155,28 @@ bool VectorExtras::MutacionDE(double Cr, double F, vector<double> Pi, vector<dou
         }
     }/**/
     return valido;
+};
+
+/////////////////////////////// SWARM
+
+
+void VectorExtras::SWARMInercia(double a1, double a2, double a3, vector<double> suj, vector<double> v, vector<double> best, vector<double> localBest, vector<double> &sujN, vector<double> &vN){
+        double vD=0;
+        double xD=0;
+        for(int i = 0 ; i < suj.size() ; i++ ){
+            vD=saturacion(a1*v[i]+a2*randDouble(-1.0, 1.0)*(localBest[i]-suj[i])+a3*randDouble(-1.0, 1.0)*(best[i]-suj[i]),-1.0,1.0);
+            vN.push_back(vD);
+        }
+        for(int i = 0 ; i < suj.size() ; i++ ){
+            xD=saturacion(suj[i]+vN[i],0.0,1.0);
+            sujN.push_back(xD);
+        }
+};
+
+double VectorExtras::SWARMDistancia(vector<double> suj1, vector<double> suj2){
+    double sum=0;
+    for(int i = 0 ; i < suj1.size() ; i++ ){
+        sum=sum+(suj1[i]-suj2[i])*(suj1[i]-suj2[i]);
+    }
+    return sum;
 };

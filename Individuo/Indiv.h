@@ -20,6 +20,7 @@ class Indiv
 		Indiv();
         
         double getFitness();
+		
 
 		void setVect(vector<double> vec);
 		void setVectSigma(vector<double> sigma);
@@ -28,6 +29,8 @@ class Indiv
 		vector<double> getVect();
 		vector<double> getVectSigma();
 
+		/////SWARM
+		double distancia;
 
    		void guarda();
 		~Indiv();

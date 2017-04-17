@@ -23,5 +23,9 @@ class VectorExtras
 
         ///////Geneticos DE
         static bool MutacionDE(double Cr, double F, vector<double> Pi, vector<double> P0, vector<double> P1, vector<double> P2, vector<double> &H1);
+
+        ///////SWARM
+        static void SWARMInercia(double a1, double a2, double a3, vector<double> suj, vector<double> v, vector<double> best, vector<double> localBest, vector<double> &sujN, vector<double> &vN);
+        static double SWARMDistancia(vector<double> suj1, vector<double> suj2);
 };
 #endif
